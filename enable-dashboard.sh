@@ -9,11 +9,11 @@ for DEPLOYMENT in $DEPLOYMENTS; do # bash separation
   kubectl wait --for=condition=available --timeout=2m deployment/$DEPLOYMENT -n kubernetes-dashboard
 done
 
-kubectl apply -f github.com/tarilabs/k8s-dashboard/serviceAccount.yaml
+curl -s "https://raw.githubusercontent.com/tarilabs/k8s-dashboard/main/serviceAccount.yaml" | kubectl apply -f -
 sleep 2
-kubectl apply -f github.com/tarilabs/k8s-dashboard/clusterRoleBinding.yaml
+curl -s "https://raw.githubusercontent.com/tarilabs/k8s-dashboard/main/clusterRoleBinding.yaml" | kubectl apply -f -
 sleep 2
-kubectl apply -f github.com/tarilabs/k8s-dashboard/bearerTokenSecret.yaml
+curl -s "https://raw.githubusercontent.com/tarilabs/k8s-dashboard/main/bearerTokenSecret.yaml" | kubectl apply -f -
 sleep 3
 
 echo "Bearer token:"
